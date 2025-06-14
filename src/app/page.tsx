@@ -65,7 +65,7 @@ export default function Home() {
     </div>
   );
 }
-export const useDebounce = function <T>(value: T, delay = 0.5) {
+const useDebounce = function <T>(value: T, delay = 0.5) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => {

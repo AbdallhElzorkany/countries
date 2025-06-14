@@ -1,7 +1,6 @@
 "use client";
 import { useContext } from "react";
 import { ThemeContext } from "@/components/ThemeProvider";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function CountryPage() {
