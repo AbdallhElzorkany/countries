@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-
 type Country = {
   name: {
     common: string;
@@ -43,6 +42,7 @@ export default function CountryPage() {
   const [country, setCountry] = useState<Country>();
   const [error, setError] = useState<string>();
   const [borders, setBorders] = useState<string[]>([]);
+  const [length, setLength] = useState(1);
   const pathname = usePathname().split("/")[1];
   useEffect(() => {
     const fetchCountry = async () => {
@@ -62,41 +62,41 @@ export default function CountryPage() {
           setError("An unknown error occurred");
         }
       } finally {
-        if(!borders)setIsLoading(false);
+        if (!borders) setIsLoading(false);
       }
     };
     fetchCountry();
-  }, [pathname,borders]);
+  }, [pathname, borders]);
 
   useEffect(() => {
-    const fetchBorders = async (Border: string) => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `https://restcountries.com/v3.1/alpha/${Border}`
-        );
-        if (!response.ok) {
-          setError("Country Not Found");
+    const fetchBorders = async (Borders: string[]) => {
+      Borders.forEach(async (border) => {
+        try {
+          setIsLoading(true);
+          const response = await fetch(
+            `https://restcountries.com/v3.1/alpha/${border}`
+          );
+          if (!response.ok) {
+            setError("Country Not Found");
+          }
+          const data = await response.json();
+          setBorders((prev) => [...prev, data[0]?.name?.common]);
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError("An unknown error occurred");
+          }
+        } finally {
+          setIsLoading(false);
         }
-        const data = await response.json();
-        setBorders((prev) => [...prev, data[0]?.name?.common]);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (country?.borders) {
-      country?.borders?.forEach((border) => {
-        fetchBorders(border);
       });
+    };
+    if (country?.borders && length > 0) {
+      setLength(0);
+      fetchBorders(country?.borders);
     }
-  }, [country?.borders]);
-
+  }, [country?.borders, length]);
   return (
     <div
       className={`font-nunito ${
