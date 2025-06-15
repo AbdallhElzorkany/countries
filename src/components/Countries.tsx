@@ -56,14 +56,13 @@ export default function Countries({
   }, [name, region]);
   return (
     <div className="mt-20 container mx-auto relative min-h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between sm:gap-5 md:gap-10 lg:gap-20">
-      {isLoading && (
+      {isLoading ? (
         <LoaderPinwheel
           className={`${
             theme === "light" ? "text-lightModeText" : "text-darkModeText"
           } size-28 animate-spin absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4`}
         />
-      )}
-      {error && (
+      ) : error ? (
         <h1
           className={`${
             theme === "light" ? "text-lightModeText" : "text-darkModeText"
@@ -71,8 +70,7 @@ export default function Countries({
         >
           {error}
         </h1>
-      )}
-      {countries.length > 0 &&
+      ) : countries.length > 0 &&
         countries.map((country: Country) => (
           <CountryCard
             country={country}
