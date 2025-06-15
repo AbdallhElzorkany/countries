@@ -54,7 +54,6 @@ export default function Countries({
     };
     fetchCountries();
   }, [name, region]);
-  console.log(countries);
   return (
     <div className="mt-20 container mx-auto relative min-h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between sm:gap-5 md:gap-10 lg:gap-20">
       {isLoading && (
