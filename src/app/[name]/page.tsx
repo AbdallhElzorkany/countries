@@ -62,11 +62,11 @@ export default function CountryPage() {
           setError("An unknown error occurred");
         }
       } finally {
-        if (!borders) setIsLoading(false);
+        if (!country?.borders) setIsLoading(false);
       }
     };
     fetchCountry();
-  }, [pathname, borders]);
+  }, [pathname,country?.borders]);
 
   useEffect(() => {
     const fetchBorders = async (Borders: string[]) => {
@@ -221,7 +221,7 @@ export default function CountryPage() {
                 <span
                   className={`opacity-80 sm:ml-3 font-light flex flex-wrap gap-2`}
                 >
-                  {borders
+                  {borders.length > 0
                     ? borders?.map((border) => (
                         <Link
                           href={`/${border}`}
