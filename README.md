@@ -6,7 +6,7 @@
 
 ## The challenge
 
-Your challenge is to integrate with the [REST Countries API](https://restcountries.com) to pull country data and display it like in the designs.
+My challenge is to integrate with the [REST Countries API](https://restcountries.com) to pull country data and display it like in the designs.
 
 My users should be able to:
 
