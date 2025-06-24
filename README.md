@@ -12,7 +12,7 @@ A modern web application that allows users to explore countries around the world
 - 📱 Responsive design that works on all devices
 - 🌓 Toggle between light and dark mode
 - ℹ️ View detailed information about each country
-- 🗺️ Navigate to bordering countries
+- 🗺️ Navigate to bordering countries.
 
 ## 🛠️ Technologies Used
 
